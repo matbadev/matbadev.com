@@ -1,0 +1,22 @@
+{
+  "name": "matbadev.com",
+  "version": "1.0.0",
+  "description": "Website hosted at matbadev.com",
+  "main": "index.html",
+  "scripts": {
+    "start": "browser-sync start --server 'src' --files '*.html' 'css/*.css' --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/matbadev/matbadev.com.git"
+  },
+  "author": "Matthias Bäuerle",
+  "bugs": {
+    "url": "https://github.com/matbadev/matbadev.com/issues"
+  },
+  "homepage": "https://github.com/matbadev/matbadev.com#readme",
+  "devDependencies": {
+    "browser-sync": "2.26.14"
+  }
+}

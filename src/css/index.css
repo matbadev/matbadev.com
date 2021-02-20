@@ -1,0 +1,216 @@
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: monospace;
+}
+
+.match-parent {
+    width: 100%;
+    height: 100%;
+}
+
+@keyframes keyframes-droid-arm-wave {
+    from {
+        transform: translate(186%, -18%) rotate(0deg);
+    }
+
+    10% {
+        transform: translate(186%, -18%) rotate(-225deg);
+    }
+
+    20% {
+        transform: translate(186%, -18%) rotate(-135deg);
+    }
+
+    30% {
+        transform: translate(186%, -18%) rotate(-225deg);
+    }
+
+    40% {
+        transform: translate(186%, -18%) rotate(0deg);
+    }
+
+    to {
+        transform: translate(186%, -18%) rotate(0deg);
+    }
+}
+
+.animation-droid-arm-wave {
+    animation: keyframes-droid-arm-wave 5s ease-in-out 2s infinite;
+}
+
+.layout-stack {
+    position: relative;
+}
+
+.layout-stack>* {
+    position: absolute;
+}
+
+#droid-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+#droid-container>#droid {
+    width: 100%;
+    height: auto;
+    user-select: none;
+}
+
+#droid-container>#droid-arm {
+    width: 12.28%;
+    height: auto;
+    transform: translate(186%, -18%);
+    user-select: none;
+}
+
+#droid-container>#droid-content {
+    width: 25%;
+    height: 22vw;
+    padding: 1rem;
+    background-color: rgba(255, 255, 255, 0.5);
+    transform: translate(26%, -10%) skew(359deg, 1deg);
+    overflow: hidden;
+    font-size: 2.5vw;
+    border-radius: 1rem;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    letter-spacing: -0.1vw;
+}
+
+#droid-container>#droid-content>span {
+    display: flex;
+    align-items: baseline;
+}
+
+#droid-container>#droid-content>h1 {
+    margin: 0;
+    padding: 0;
+    font-size: 3vw;
+}
+
+#droid-container>#droid-content .b {
+    width: 4vw;
+    font-size: 4vw;
+    margin-right: 0.1vw;
+    color: palegreen;
+    display: inline-block;
+    text-align: end;
+}
+
+#droid-container>#droid-content p {
+    margin: 0;
+}
+
+@media (max-aspect-ratio: 4/3) {
+    #droid-container>#droid {
+        width: auto;
+        height: 100%;
+    }
+
+    #droid-container>#droid-arm {
+        width: auto;
+        height: 32.38%;
+    }
+
+    #droid-container>#droid-content {
+        width: 33vh;
+        height: 32%;
+        font-size: 2.5vh;
+    }
+
+    #droid-container>#droid-content>* {
+        white-space: nowrap;
+        overflow: hidden;
+    }
+
+    #droid-container>#droid-content>h1 {
+        font-size: 3vh;
+    }
+
+    #droid-container>#droid-content .b {
+        width: 5vh;
+        font-size: 3vh;
+        margin-right: 0.1vh;
+    }
+}
+
+#droid-container>#droid-content>*:nth-child(1) {
+    animation: typewriter-10 2s steps(10) 0s 1 normal both, blink .5s step-end infinite alternate;
+}
+
+#droid-container>#droid-content>*:nth-child(2) {
+    animation: typewriter-13 2s steps(13) 2s 1 normal both, blink .5s step-end infinite alternate;
+}
+
+#droid-container>#droid-content>*:nth-child(3) {
+    animation: typewriter 2s steps(21) 4s 1 normal both;
+}
+
+#droid-container>#droid-content>*:nth-child(4) {
+    animation: typewriter 2s steps(21) 6s 1 normal both;
+}
+
+#droid-container>#droid-content>*:nth-child(5) {
+    animation: typewriter 2s steps(21) 8s 1 normal both;
+}
+
+#droid-container>#droid-content>*:nth-child(6) {
+    animation: typewriter 2s steps(21) 10s 1 normal both;
+}
+
+#droid-container>#droid-content>*:nth-child(7) {
+    animation: typewriter 2s steps(21) 12s 1 normal both;
+}
+
+@keyframes blink {
+    50% {
+        border-color: transparent;
+    }
+}
+
+@keyframes typewriter-10 {
+    from {
+        width: 0ch;
+        border-right: 2px solid black;
+    }
+
+    99% {
+        width: 10ch;
+        border-right: 2px solid black;
+    }
+
+    to {
+        width: 10ch;
+        border-right: none;
+    }
+}
+
+@keyframes typewriter-13 {
+    from {
+        width: 0ch;
+        border-right: none;
+    }
+
+    1% {
+        width: 0ch;
+        border-right: 2px solid black;
+    }
+
+    to {
+        width: 13ch;
+        border-right: 2px solid black;
+    }
+}
