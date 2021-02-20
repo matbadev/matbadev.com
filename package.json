@@ -4,8 +4,13 @@
   "description": "Website hosted at matbadev.com",
   "main": "index.html",
   "scripts": {
-    "start": "browser-sync start --server 'src' --files '*.html' 'css/*.css' --watch",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "clean": "rm -rf build/ public/css/",
+    "start": "npm run clean && (npm run start:sass & npm run start:server)",
+    "start:sass": "sass --no-source-map --watch src/css:public/css",
+    "start:server": "browser-sync start --server 'public' --watch",
+    "build": "npm run clean && npm run build:public && npm run build:sass",
+    "build:public": "cp -r public/ build/",
+    "build:sass": "sass src/css:build/css"
   },
   "repository": {
     "type": "git",
@@ -17,6 +22,7 @@
   },
   "homepage": "https://github.com/matbadev/matbadev.com#readme",
   "devDependencies": {
-    "browser-sync": "2.26.14"
+    "browser-sync": "2.26.14",
+    "sass": "1.32.8"
   }
 }

@@ -1,58 +1,8 @@
-* {
-    box-sizing: border-box;
-}
-
-html,
-body {
-    padding: 0;
-    margin: 0;
-}
-
-body {
-    font-family: monospace;
-}
-
-.match-parent {
-    width: 100%;
-    height: 100%;
-}
-
-@keyframes keyframes-droid-arm-wave {
-    from {
-        transform: translate(186%, -18%) rotate(0deg);
-    }
-
-    10% {
-        transform: translate(186%, -18%) rotate(-225deg);
-    }
-
-    20% {
-        transform: translate(186%, -18%) rotate(-135deg);
-    }
-
-    30% {
-        transform: translate(186%, -18%) rotate(-225deg);
-    }
-
-    40% {
-        transform: translate(186%, -18%) rotate(0deg);
-    }
-
-    to {
-        transform: translate(186%, -18%) rotate(0deg);
-    }
-}
+@use 'common';
+@use 'animations';
 
 .animation-droid-arm-wave {
     animation: keyframes-droid-arm-wave 5s ease-in-out 2s infinite;
-}
-
-.layout-stack {
-    position: relative;
-}
-
-.layout-stack>* {
-    position: absolute;
 }
 
 #droid-container {
@@ -173,44 +123,4 @@ body {
 
 #droid-container>#droid-content>*:nth-child(7) {
     animation: typewriter 2s steps(21) 12s 1 normal both;
-}
-
-@keyframes blink {
-    50% {
-        border-color: transparent;
-    }
-}
-
-@keyframes typewriter-10 {
-    from {
-        width: 0ch;
-        border-right: 2px solid black;
-    }
-
-    99% {
-        width: 10ch;
-        border-right: 2px solid black;
-    }
-
-    to {
-        width: 10ch;
-        border-right: none;
-    }
-}
-
-@keyframes typewriter-13 {
-    from {
-        width: 0ch;
-        border-right: none;
-    }
-
-    1% {
-        width: 0ch;
-        border-right: 2px solid black;
-    }
-
-    to {
-        width: 13ch;
-        border-right: 2px solid black;
-    }
 }
