@@ -22,7 +22,6 @@
   },
   "homepage": "https://github.com/matbadev/matbadev.com#readme",
   "devDependencies": {
-    "browser-sync": "2.26.14",
     "sass": "1.32.8"
   }
 }
