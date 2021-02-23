@@ -1,99 +1,115 @@
 @use 'common';
 @use 'animations';
 
-.animation-droid-arm-wave {
-    animation: keyframes-droid-arm-wave 5s ease-in-out 2s infinite;
+@function strip-unit($value) {
+    @return $value / ($value * 0 + 1);
 }
 
-#droid-container {
+$io2019-base-width: 2304px;
+$io2019-base-height: 1728px;
+$io2019-base-ratio: $io2019-base-width / $io2019-base-height;
+$io2019-base-ratio-image: "#{strip-unit($io2019-base-width)} / #{strip-unit($io2019-base-height)}";
+
+$io2019-android-arm-width: 219px;
+$io2019-android-arm-height: 501px;
+$io2019-android-arm-translate-x: 247%;
+$io2019-android-arm-translate-y: -18%;
+
+$io2019-person-arm-width: 168px;
+$io2019-person-arm-height: 122px;
+$io2019-person-arm-translate-x: -82%;
+$io2019-person-arm-translate-y: -78%;
+
+#io2019-container {
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
 }
 
-#droid-container>#droid {
+#io2019-base {
     width: 100%;
     height: auto;
     user-select: none;
+
+    @media (max-aspect-ratio: $io2019-base-ratio-image) {
+        & {
+            width: auto;
+            height: 100%;
+        }
+    }
 }
 
-#droid-container>#droid-arm {
-    width: 12.28%;
+#io2019-android-arm {
+    width: percentage($io2019-android-arm-width / $io2019-base-width);
     height: auto;
-    transform: translate(186%, -18%);
+    transform: translate($io2019-android-arm-translate-x, $io2019-android-arm-translate-y);
     user-select: none;
+    pointer-events: none;
+
+    @media (max-aspect-ratio: $io2019-base-ratio-image) {
+        & {
+            width: auto;
+            height: percentage($io2019-android-arm-height / $io2019-base-height);
+        }
+    }
 }
 
-#droid-container>#droid-content {
-    width: 25%;
-    height: 22vw;
+#io2019-person-arm {
+    width: percentage($io2019-person-arm-width / $io2019-base-width);
+    height: auto;
+    transform: translate($io2019-person-arm-translate-x, $io2019-person-arm-translate-y);
+    user-select: none;
+    pointer-events: none;
+
+    @media (max-aspect-ratio: $io2019-base-ratio-image) {
+        & {
+            width: auto;
+            height: percentage($io2019-person-arm-height / $io2019-base-height);
+        }
+    }
+}
+
+#io2019-content {
+    width: 25vw;
+    height: auto;
+    transform: translate(26%, -7%) skew(359deg, 1deg);
     padding: 1rem;
-    background-color: rgba(255, 255, 255, 0.5);
-    transform: translate(26%, -10%) skew(359deg, 1deg);
-    overflow: hidden;
-    font-size: 2.5vw;
-    border-radius: 1rem;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
-    letter-spacing: -0.1vw;
-}
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, 0.5);
+    font-size: 1.8vw;
+    border-radius: 1rem;
+    white-space: nowrap;
 
-#droid-container>#droid-content>span {
-    display: flex;
-    align-items: baseline;
-}
-
-#droid-container>#droid-content>h1 {
-    margin: 0;
-    padding: 0;
-    font-size: 3vw;
-}
-
-#droid-container>#droid-content .b {
-    width: 4vw;
-    font-size: 4vw;
-    margin-right: 0.1vw;
-    color: palegreen;
-    display: inline-block;
-    text-align: end;
-}
-
-#droid-container>#droid-content p {
-    margin: 0;
-}
-
-@media (max-aspect-ratio: 4/3) {
-    #droid-container>#droid {
-        width: auto;
-        height: 100%;
+    @media (max-aspect-ratio: $io2019-base-ratio-image) {
+        & {
+            width: 25vh * $io2019-base-ratio;
+            font-size: 1.8vh * $io2019-base-ratio;
+        }
     }
 
-    #droid-container>#droid-arm {
-        width: auto;
-        height: 32.38%;
+    > span {
+
+        > b {
+            color: palegreen;
+        }
     }
 
-    #droid-container>#droid-content {
-        width: 33vh;
-        height: 32%;
-        font-size: 2.5vh;
-    }
+    > h1 {
+        margin: 0;
+        padding: 0;
+        font-size: 3vw;
+        margin-bottom: 2vw;
 
-    #droid-container>#droid-content>* {
-        white-space: nowrap;
-        overflow: hidden;
-    }
-
-    #droid-container>#droid-content>h1 {
-        font-size: 3vh;
-    }
-
-    #droid-container>#droid-content .b {
-        width: 5vh;
-        font-size: 3vh;
-        margin-right: 0.1vh;
+        @media (max-aspect-ratio: $io2019-base-ratio-image) {
+            & {
+                font-size: 3vh * $io2019-base-ratio;
+                margin-bottom: 2vh * $io2019-base-ratio;
+            }
+        }
     }
 }
 

@@ -63,3 +63,7 @@
         border-right: 2px solid black;
     }
 }
+
+.animation-droid-arm-wave {
+    animation: keyframes-droid-arm-wave 5s ease-in-out 2s infinite;
+}
