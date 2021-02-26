@@ -32,6 +32,7 @@ $page-base-ratio-string: "#{$page-base-x} / #{$page-base-y}";
 
 $page-portrait-x: 7;
 $page-portrait-y: 10;
+$page-portrait-ratio: $page-portrait-x / $page-portrait-y;
 $page-portrait-ratio-string: "#{$page-portrait-x} / #{$page-portrait-y}";
 $page-portrait-scaling: $page-base-ratio * ($page-portrait-y / $page-portrait-x);
 
@@ -46,7 +47,7 @@ html {
 
     @media (max-aspect-ratio: $page-portrait-ratio-string) {
         & {
-            font-size: (1.7 * $page-portrait-scaling) * 1vw;
+            font-size: 1.7vw * $page-portrait-scaling;
         }
     }
 }
@@ -56,6 +57,12 @@ html {
     align-items: center;
     justify-content: center;
     overflow: hidden;
+
+    @media (max-aspect-ratio: $page-portrait-ratio-string) {
+        & {
+            height: 100vw / $page-portrait-ratio;
+        }
+    }
 }
 
 #io2019-base {
