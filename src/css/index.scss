@@ -5,17 +5,12 @@
     @return $value / ($value * 0 + 1);
 }
 
+// Image dimensions
+
 $io2019-base-width: 2304px;
 $io2019-base-height: 1728px;
-$io2019-base-ratio: $io2019-base-width / $io2019-base-height;
-$io2019-base-ratio-image-x: 4;
-$io2019-base-ratio-image-y: 3;
-$io2019-base-ratio-image: "#{$io2019-base-ratio-image-x} / #{$io2019-base-ratio-image-y}";
-
-$io2019-base-ratio-portrait-x: 7;
-$io2019-base-ratio-portrait-y: 10;
-$io2019-base-ratio-portrait: "#{$io2019-base-ratio-portrait-x} / #{$io2019-base-ratio-portrait-y}";
-$io2019-portrait-scaling: ($io2019-base-width / $io2019-base-height) * ($io2019-base-ratio-portrait-y / $io2019-base-ratio-portrait-x);
+$io2019-base-x: 4;
+$io2019-base-y: 3;
 
 $io2019-android-arm-width: 219px;
 $io2019-android-arm-height: 501px;
@@ -27,18 +22,31 @@ $io2019-person-arm-height: 122px;
 $io2019-person-arm-translate-x: -82%;
 $io2019-person-arm-translate-y: -78%;
 
+
+// Page dimensions
+
+$page-base-x: $io2019-base-x;
+$page-base-y: $io2019-base-y;
+$page-base-ratio: $page-base-x / $page-base-y;
+$page-base-ratio-string: "#{$page-base-x} / #{$page-base-y}";
+
+$page-portrait-x: 7;
+$page-portrait-y: 10;
+$page-portrait-ratio-string: "#{$page-portrait-x} / #{$page-portrait-y}";
+$page-portrait-scaling: $page-base-ratio * ($page-portrait-y / $page-portrait-x);
+
 html {
     font-size: 1.7vw;
 
-    @media (max-aspect-ratio: $io2019-base-ratio-image) {
+    @media (max-aspect-ratio: $page-base-ratio-string) {
         & {
-            font-size: 1.7vh * $io2019-base-ratio;
+            font-size: 1.7vh * $page-base-ratio;
         }
     }
 
-    @media (max-aspect-ratio: $io2019-base-ratio-portrait) {
+    @media (max-aspect-ratio: $page-portrait-ratio-string) {
         & {
-            font-size: (1.7 * $io2019-portrait-scaling) * 1vw;
+            font-size: (1.7 * $page-portrait-scaling) * 1vw;
         }
     }
 }
@@ -55,16 +63,16 @@ html {
     height: auto;
     user-select: none;
 
-    @media (max-aspect-ratio: $io2019-base-ratio-image) {
+    @media (max-aspect-ratio: $page-base-ratio-string) {
         & {
             width: auto;
             height: 100%;
         }
     }
 
-    @media (max-aspect-ratio: $io2019-base-ratio-portrait) {
+    @media (max-aspect-ratio: $page-portrait-ratio-string) {
         & {
-            width: percentage($io2019-portrait-scaling);
+            width: percentage($page-portrait-scaling);
             height: auto;
         }
     }
@@ -77,16 +85,16 @@ html {
     user-select: none;
     pointer-events: none;
 
-    @media (max-aspect-ratio: $io2019-base-ratio-image) {
+    @media (max-aspect-ratio: $page-base-ratio-string) {
         & {
             width: auto;
             height: percentage($io2019-android-arm-height / $io2019-base-height);
         }
     }
 
-    @media (max-aspect-ratio: $io2019-base-ratio-portrait) {
+    @media (max-aspect-ratio: $page-portrait-ratio-string) {
         & {
-            width: percentage($io2019-android-arm-width / $io2019-base-width * $io2019-portrait-scaling);
+            width: percentage($io2019-android-arm-width / $io2019-base-width * $page-portrait-scaling);
             height: auto;
         }
     }
@@ -99,16 +107,16 @@ html {
     user-select: none;
     pointer-events: none;
 
-    @media (max-aspect-ratio: $io2019-base-ratio-image) {
+    @media (max-aspect-ratio: $page-base-ratio-string) {
         & {
             width: auto;
             height: percentage($io2019-person-arm-height / $io2019-base-height);
         }
     }
 
-    @media (max-aspect-ratio: $io2019-base-ratio-portrait) {
+    @media (max-aspect-ratio: $page-portrait-ratio-string) {
         & {
-            width: percentage($io2019-person-arm-width / $io2019-base-width * $io2019-portrait-scaling);
+            width: percentage($io2019-person-arm-width / $io2019-base-width * $page-portrait-scaling);
             height: auto;
         }
     }
@@ -127,7 +135,7 @@ html {
     border-radius: 2rem;
     white-space: nowrap;
 
-    * > {
+    > * {
         margin: 0;
         padding: 0;
     }
