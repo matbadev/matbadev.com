@@ -22,6 +22,9 @@ $io2019-person-arm-height: 122px;
 $io2019-person-arm-translate-x: -82%;
 $io2019-person-arm-translate-y: -78%;
 
+$io2019-grass-width: 265px;
+$io2019-grass-height: 265px;
+
 
 // Page dimensions
 
@@ -48,6 +51,24 @@ html {
     @media (max-aspect-ratio: $page-portrait-ratio-string) {
         & {
             font-size: 1.7vw * $page-portrait-scaling;
+        }
+    }
+}
+
+body {
+    background-color: #5b702a;
+    background-image: url("/img/io2019/io2019-grass@0.5x.jpg");
+    background-size: percentage($io2019-grass-width / $io2019-base-width) auto;
+
+    @media (max-aspect-ratio: $page-base-ratio-string) {
+        & {
+            background-size: auto percentage($io2019-grass-height / $io2019-base-height);
+        }
+    }
+
+    @media (max-aspect-ratio: $page-portrait-ratio-string) {
+        & {
+            background-size: percentage($io2019-grass-width / $io2019-base-width * $page-portrait-scaling) auto;
         }
     }
 }
@@ -89,6 +110,7 @@ html {
     width: percentage($io2019-android-arm-width / $io2019-base-width);
     height: auto;
     transform: translate($io2019-android-arm-translate-x, $io2019-android-arm-translate-y);
+    transform-origin: 50% 10%;
     user-select: none;
     pointer-events: none;
 
