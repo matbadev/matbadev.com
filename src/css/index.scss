@@ -181,6 +181,55 @@ body {
     }
 }
 
+footer {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+
+    #logo-container {
+        width: 50%;
+        margin: 0;
+        padding: 0 1rem;
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+        list-style-type: none;
+        background-color: rgba(0, 0, 0, 0.85);
+        border-radius: 1rem 1rem 0 0;
+
+        > li + li {
+            margin-left: 0.5rem;
+        }
+
+        a {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            padding: 0.5rem;
+
+            &:hover, &:focus {
+                opacity: 0.5;
+            }
+        }
+
+        @media (max-aspect-ratio: $page-base-ratio-string) {
+            & {
+                width: $io2019-base-width * 0.22;
+            }
+        }
+
+        @media (max-aspect-ratio: $page-portrait-ratio-string) {
+            & {
+                width: 95%;
+            }
+        }
+    }
+}
+
 #droid-container>#droid-content>*:nth-child(1) {
     animation: typewriter-10 2s steps(10) 0s 1 normal both, blink .5s step-end infinite alternate;
 }
