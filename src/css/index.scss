@@ -2,9 +2,16 @@
 @use 'common';
 @use 'animations';
 
-@function strip-unit($value) {
-    @return $value / ($value * 0 + 1);
+@mixin positions($top, $right, $bottom, $left) {
+    top: $top;
+    right: $right;
+    bottom: $bottom;
+    left: $left;
 }
+
+
+$footer-height: 1.5rem;
+
 
 // Image dimensions
 
@@ -34,14 +41,21 @@ $page-base-y: $io2019-base-y;
 $page-base-ratio: $page-base-x / $page-base-y;
 $page-base-ratio-string: "#{$page-base-x} / #{$page-base-y}";
 
-$page-portrait-x: 7;
+$page-portrait-x: 8;
 $page-portrait-y: 10;
 $page-portrait-ratio: $page-portrait-x / $page-portrait-y;
 $page-portrait-ratio-string: "#{$page-portrait-x} / #{$page-portrait-y}";
 $page-portrait-scaling: $page-base-ratio * ($page-portrait-y / $page-portrait-x);
 
+$page-narrow-x: 6;
+$page-narrow-y: 10;
+$page-narrow-ratio: $page-narrow-x / $page-narrow-y;
+$page-narrow-ratio-string: "#{$page-narrow-x} / #{$page-narrow-y}";
+
+
 html {
     font-size: 1.7vw;
+    font-family: sans-serif;
 
     @media (max-aspect-ratio: $page-base-ratio-string) {
         & {
@@ -74,7 +88,9 @@ body {
     }
 }
 
-#io2019-container {
+main {
+    width: 100%;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -153,82 +169,150 @@ body {
 }
 
 #io2019-content {
-    width: 14.5rem;
+    width: 13rem;
     height: auto;
-    transform: translate(26%, -7%) skew(359deg, 1deg);
+    transform: translate(24.5%, -7%) skew(359deg, 1deg);
     padding: 1rem;
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-    overflow: hidden;
     background-color: rgba(255, 255, 255, 0.5);
     border-radius: 2rem;
-    white-space: nowrap;
 
-    > * {
+    pre {
+        width: 100%;
         margin: 0;
-        padding: 0;
+        overflow: hidden;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+
+        > * {
+            margin: 0;
+        }
     }
 
-    > h1 {
+    h1 {
         font-size: 2rem;
         margin-bottom: 1rem;
     }
 
-    > span {
+    span {
         > b {
             color: palegreen;
         }
     }
 }
 
-footer {
-    width: 100%;
+#logo-container {
     position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    @include positions(0, auto, 0, 0);
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    color: white;
 
-    #logo-container {
-        width: 50%;
+    @media (max-aspect-ratio: $page-base-ratio-string) {
+        & {
+            @include positions(auto, 0, $footer-height, 0);
+            flex-direction: row;
+        }
+    }
+
+    > ul {
         margin: 0;
-        padding: 0 1rem;
+        padding: 1rem;
         display: flex;
-        flex-direction: row;
-        align-items: stretch;
+        flex-direction: column;
         list-style-type: none;
         background-color: rgba(0, 0, 0, 0.85);
-        border-radius: 1rem 1rem 0 0;
-
-        > li + li {
-            margin-left: 0.5rem;
-        }
-
-        a {
-            height: 100%;
-            display: flex;
-            align-items: center;
-            padding: 0.5rem;
-
-            &:hover, &:focus {
-                opacity: 0.5;
-            }
-        }
+        border-radius: 0 1rem 1rem 0;
 
         @media (max-aspect-ratio: $page-base-ratio-string) {
             & {
-                width: $io2019-base-width * 0.22;
+                flex-direction: row;
+                border-radius: 1rem 1rem 0 0;
             }
         }
 
-        @media (max-aspect-ratio: $page-portrait-ratio-string) {
+        @media (max-aspect-ratio: $page-narrow-ratio-string) {
             & {
-                width: 95%;
+                flex-direction: column;
+            }
+        }
+
+        > li + li {
+            margin: 2rem 0 0 0;
+
+            @media (max-aspect-ratio: $page-base-ratio-string) {
+                & {
+                    margin: 0 0 0 2rem;
+                }
+            }
+
+            @media (max-aspect-ratio: $page-narrow-ratio-string) {
+                & {
+                    margin: 2rem 0 0 0;
+                }
             }
         }
     }
+
+    a {
+        display: block;
+        color: inherit;
+        text-decoration: inherit;
+
+        &:hover, &:focus {
+            opacity: 0.75;
+        }
+
+        figure {
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+
+            @media (max-aspect-ratio: $page-base-ratio-string) {
+                & {
+                    align-items: center;
+                }
+            }
+
+            @media (max-aspect-ratio: $page-narrow-ratio-string) {
+                & {
+                    flex-direction: row;
+                    justify-content: space-between;
+                }
+            }
+
+            figcaption + img {
+                margin: 0.25rem 0 0 0;
+
+                @media (max-aspect-ratio: $page-base-ratio-string) {
+                    & {
+                        margin: 0.5rem 0 0 0;
+                    }
+                }
+
+                @media (max-aspect-ratio: $page-narrow-ratio-string) {
+                    & {
+                        margin: 0 0 0 2rem;
+                    }
+                }
+            }
+        }
+    }
+}
+
+#copyright {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: $footer-height;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.95);
 }
 
 #droid-container>#droid-content>*:nth-child(1) {

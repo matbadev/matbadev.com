@@ -5,14 +5,14 @@
     <link rel="stylesheet" href="css/index.css" />
 </head>
 
-<body class="match-parent">
-    <main class="match-parent">
-        <div id="io2019-container" class="match-parent layout-stack">
-            <img id="io2019-base" src="img/io2019/base@0.5x.jpg" />
+<body class="match-parent layout-stack">
+    <main class="layout-stack">
+        <img id="io2019-base" src="img/io2019/base@0.5x.jpg" />
 
-            <img id="io2019-android-arm" class="animation-droid-arm-wav" src="img/io2019/android-arm@0.5x.png" />
+        <img id="io2019-android-arm" class="animation-droid-arm-wav" src="img/io2019/android-arm@0.5x.png" />
 
-            <div id="io2019-content">
+        <article id="io2019-content">
+            <pre>
                 <h1>Hey there!</h1>
                 <span><b>&nbsp;&nbsp;&nbsp;</b>My name is</span>
                 <span><b>Mat</b>thias</span>
@@ -20,38 +20,45 @@
                 <span><b>&nbsp;&nbsp;&nbsp;</b>and I'm passionate</span>
                 <span><b>&nbsp;&nbsp;&nbsp;</b>about software</span>
                 <span><b>dev</b>elopment</span>
-                </table>
-            </div>
+            </pre>
+        </article>
 
-            <img id="io2019-person-arm" src="img/io2019/person-arm@0.5x.png" />
-        </div>
+        <img id="io2019-person-arm" src="img/io2019/person-arm@0.5x.png" />
     </main>
 
-    <footer>
-        <ul id="logo-container">
-            <!-- See: https://github.com/logos -->
-            <li style="width: 80%;">
+    <aside id="logo-container">
+        <ul>
+            <li>
                 <a href="https://github.com/matbadev" target="_blank" referrerpolicy="no-referrer">
-                    <img src="img/logos/github.png" width="100%" alt="Visit LinkedIn profile" />
+                    <figure>
+                        <figcaption>Projects</figcaption>
+                        <img src="img/logos/github.png" alt="GitHub logo" style="width: 8rem;" />
+                    </figure>
                 </a>
             </li>
 
-            <!-- See: https://brand.linkedin.com/downloads -->
-            <li style="width: 100%;">
+            <li>
                 <a href="https://www.linkedin.com/in/matthias-baeuerle/" target="_blank" referrerpolicy="no-referrer">
-                    <img src="img/logos/linkedin.png" width="100%" alt="Visit LinkedIn profile" />
+                    <figure>
+                        <figcaption>Education &amp; Experience</figcaption>
+                        <img src="img/logos/linkedin.png" alt="LinkedIn logo" style="width: 10rem;" />
+                    </figure>
                 </a>
             </li>
 
-            <!-- See: https://play.google.com/intl/en_us/badges/ -->
-            <li style="width: 100%;">
+            <li>
                 <a href='https://play.google.com/store/apps/developer?id=Matthias+B%C3%A4uerle' target="_blank"
                     referrerpolicy="no-referrer">
-                    <img src="img/logos/google-play-get.png" width="100%" alt="Get it on Google Play" />
+                    <figure>
+                        <figcaption>Android Apps</figcaption>
+                        <img src="img/logos/google-play-get.png" alt="Get it on Google Play" style="width: 9rem;" />
+                    </figure>
                 </a>
             </li>
         </ul>
-    </footer>
+    </aside>
+
+    <footer id="copyright">Created by Matthias Bäuerle</footer>
 </body>
 
 </html>
