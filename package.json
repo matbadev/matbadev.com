@@ -21,6 +21,9 @@
     "url": "https://github.com/matbadev/matbadev.com/issues"
   },
   "homepage": "https://github.com/matbadev/matbadev.com#readme",
+  "dependencies": {
+    "normalize.css": "^8.0.1"
+  },
   "devDependencies": {
     "sass": "1.32.8"
   }
