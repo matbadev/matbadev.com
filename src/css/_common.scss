@@ -6,7 +6,7 @@
 .layout-stack {
     position: relative;
 
-    &>* {
+    & > * {
         position: absolute;
     }
 }
