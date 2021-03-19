@@ -2,6 +2,7 @@
 @use 'common';
 @use 'animations';
 
+$initial-animation-delay-seconds: 2;
 
 // Header dimensions
 
@@ -19,9 +20,6 @@ $io2019-person-arm-width: 168px;
 $io2019-person-arm-height: 122px;
 $io2019-person-arm-translate-x: -82%;
 $io2019-person-arm-translate-y: -78%;
-
-$io2019-grass-width: 265px;
-$io2019-grass-height: 265px;
 
 
 // Page dimensions
@@ -79,20 +77,6 @@ html {
 body {
     background-color: var(--color-background);
     color: var(--color-background-inverse);
-
-    background-size: percentage($io2019-grass-width / $io2019-base-width) auto;
-
-    @media (max-aspect-ratio: $page-base-ratio-string) {
-        & {
-            background-size: auto percentage($io2019-grass-height / $io2019-base-height);
-        }
-    }
-
-    @media (max-aspect-ratio: $page-portrait-ratio-string) {
-        & {
-            background-size: percentage($io2019-grass-width / $io2019-base-width * $page-portrait-scaling) auto;
-        }
-    }
 }
 
 #io2019 {
@@ -130,13 +114,42 @@ body {
     }
 }
 
+$io2019-android-arm-translate: translate($io2019-android-arm-translate-x, $io2019-android-arm-translate-y);
+
+@keyframes keyframes-android-arm-wave {
+    from {
+        transform: $io2019-android-arm-translate rotate(0deg);
+    }
+
+    10% {
+        transform: $io2019-android-arm-translate rotate(-225deg);
+    }
+
+    20% {
+        transform: $io2019-android-arm-translate rotate(-135deg);
+    }
+
+    30% {
+        transform: $io2019-android-arm-translate rotate(-225deg);
+    }
+
+    40% {
+        transform: $io2019-android-arm-translate rotate(0deg);
+    }
+
+    to {
+        transform: $io2019-android-arm-translate rotate(0deg);
+    }
+}
+
 #io2019-android-arm {
     width: percentage($io2019-android-arm-width / $io2019-base-width);
     height: auto;
-    transform: translate($io2019-android-arm-translate-x, $io2019-android-arm-translate-y);
+    transform: $io2019-android-arm-translate;
     transform-origin: 50% 10%;
     user-select: none;
     pointer-events: none;
+    animation: keyframes-android-arm-wave 5s ease-in-out #{$initial-animation-delay-seconds}s infinite;
 
     @media (max-aspect-ratio: $page-base-ratio-string) {
         & {
@@ -190,6 +203,8 @@ body {
 
     > * {
         margin: 0;
+        overflow: hidden;
+        border-right: 0.2ch solid transparent; // Cursor
     }
 
     h1 {
@@ -202,6 +217,58 @@ body {
             color: #8af78a;
         }
     }
+}
+
+$duration-per-char-seconds: 0.05;
+$io2019-content-line-lengths: (
+    1: 10,
+    2: 13,
+    3: 8,
+    4: 8,
+    5: 21,
+    6: 17,
+    7: 11
+);
+
+@mixin generate-keyframes-typewriter($chars-count) {
+    @keyframes keyframes-typewriter-#{$chars-count} {
+        from {
+            width: 0ch;
+        }
+    
+        to {
+            width: #{$chars-count}ch;
+        }
+    }
+}
+
+$generated-keyframes-typewriter: ();
+@each $line-number, $line-length in $io2019-content-line-lengths {
+    @if map-get($generated-keyframes-typewriter, $line-length) == null {
+        $generated-keyframes-typewriter: map-merge($generated-keyframes-typewriter, ($line-length: true));
+        @include generate-keyframes-typewriter($line-length);
+    }
+}
+
+$total-duration-seconds: $initial-animation-delay-seconds;
+@each $line-number, $line-length in $io2019-content-line-lengths {
+    $line-duration-seconds: $line-length * $duration-per-char-seconds;
+
+    $animations: (
+        keyframes-typewriter-#{$line-length} #{$line-duration-seconds}s steps(#{$line-length}) #{$total-duration-seconds}s 1 normal both,
+        border-black-full #{$line-duration-seconds}s steps(1) #{$total-duration-seconds}s 1 normal none
+    );
+
+    @if $line-number == length($io2019-content-line-lengths) {
+        $end-cursor-animation: border-black-blink 0.5s step-end #{$total-duration-seconds + $line-duration-seconds}s infinite alternate;
+        $animations: append($animations, $end-cursor-animation)
+    }
+
+    #io2019-content > *:nth-child(#{$line-number}) {
+        animation: $animations;
+    }
+
+    $total-duration-seconds: $total-duration-seconds + $line-duration-seconds;
 }
 
 #logo-container {
@@ -250,32 +317,4 @@ body {
     padding: 0.5rem;
     background-color: var(--color-background-inverse);
     color: var(--color-background);
-}
-
-#droid-container>#droid-content>*:nth-child(1) {
-    animation: typewriter-10 2s steps(10) 0s 1 normal both, blink .5s step-end infinite alternate;
-}
-
-#droid-container>#droid-content>*:nth-child(2) {
-    animation: typewriter-13 2s steps(13) 2s 1 normal both, blink .5s step-end infinite alternate;
-}
-
-#droid-container>#droid-content>*:nth-child(3) {
-    animation: typewriter 2s steps(21) 4s 1 normal both;
-}
-
-#droid-container>#droid-content>*:nth-child(4) {
-    animation: typewriter 2s steps(21) 6s 1 normal both;
-}
-
-#droid-container>#droid-content>*:nth-child(5) {
-    animation: typewriter 2s steps(21) 8s 1 normal both;
-}
-
-#droid-container>#droid-content>*:nth-child(6) {
-    animation: typewriter 2s steps(21) 10s 1 normal both;
-}
-
-#droid-container>#droid-content>*:nth-child(7) {
-    animation: typewriter 2s steps(21) 12s 1 normal both;
 }

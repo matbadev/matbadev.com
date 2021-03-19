@@ -1,69 +1,23 @@
-@keyframes keyframes-droid-arm-wave {
+@keyframes border-black-blink {
     from {
-        transform: translate(186%, -18%) rotate(0deg);
+        border-color: black;
     }
 
-    10% {
-        transform: translate(186%, -18%) rotate(-225deg);
-    }
-
-    20% {
-        transform: translate(186%, -18%) rotate(-135deg);
-    }
-
-    30% {
-        transform: translate(186%, -18%) rotate(-225deg);
-    }
-
-    40% {
-        transform: translate(186%, -18%) rotate(0deg);
-    }
-
-    to {
-        transform: translate(186%, -18%) rotate(0deg);
-    }
-}
-
-@keyframes blink {
     50% {
         border-color: transparent;
     }
+
+    to {
+        border-color: black;
+    }
 }
 
-@keyframes typewriter-10 {
+@keyframes border-black-full {
     from {
-        width: 0ch;
-        border-right: 2px solid black;
-    }
-
-    99% {
-        width: 10ch;
-        border-right: 2px solid black;
+        border-color: black;
     }
 
     to {
-        width: 10ch;
-        border-right: none;
+        border-color: black;
     }
-}
-
-@keyframes typewriter-13 {
-    from {
-        width: 0ch;
-        border-right: none;
-    }
-
-    1% {
-        width: 0ch;
-        border-right: 2px solid black;
-    }
-
-    to {
-        width: 13ch;
-        border-right: 2px solid black;
-    }
-}
-
-.animation-droid-arm-wave {
-    animation: keyframes-droid-arm-wave 5s ease-in-out 2s infinite;
 }
