@@ -1,0 +1,28 @@
+$animations-initial-delay: 2;
+
+:root {
+    // Basic styling
+
+    font-size: 2vw;
+    font-family: sans-serif;
+
+
+    // Colors
+
+    --color-background: #e1e4e1;
+    --color-background-inverse: #000000;
+    --color-background-hover: #00000020;
+
+    @media (prefers-color-scheme: dark) {
+        & {
+            --color-background: #000000;
+            --color-background-inverse: #ffffff;
+            --color-background-hover: #00000020;
+        }
+    }
+}
+
+body {
+    background-color: var(--color-background);
+    color: var(--color-background-inverse);
+}

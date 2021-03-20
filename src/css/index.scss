@@ -1,8 +1,7 @@
 @use '../../node_modules/normalize.css/normalize.css';
 @use 'common';
+@use 'theme';
 @use 'animations';
-
-$initial-animation-delay-seconds: 2;
 
 // Header dimensions
 
@@ -39,45 +38,6 @@ $page-narrow-x: 6;
 $page-narrow-y: 10;
 $page-narrow-ratio: $page-narrow-x / $page-narrow-y;
 $page-narrow-ratio-string: "#{$page-narrow-x} / #{$page-narrow-y}";
-
-
-html {
-    // Basic styling
-    font-family: sans-serif;
-    
-    // Colors
-    --color-background: #e1e4e1;
-    --color-background-inverse: #000000;
-    --color-background-hover: #00000020;
-
-    @media (prefers-color-scheme: dark) {
-        & {
-            --color-background: #000000;
-            --color-background-inverse: #ffffff;
-            --color-background-hover: #00000020;
-        }
-    }
-
-    // Font styling
-    font-size: 1.7vw;
-
-    @media (max-aspect-ratio: $page-base-ratio-string) {
-        & {
-            font-size: 1.7vh * $page-base-ratio;
-        }
-    }
-
-    @media (max-aspect-ratio: $page-portrait-ratio-string) {
-        & {
-            font-size: 1.7vw * $page-portrait-scaling;
-        }
-    }
-}
-
-body {
-    background-color: var(--color-background);
-    color: var(--color-background-inverse);
-}
 
 #io2019 {
     width: 100%;
@@ -149,7 +109,7 @@ $io2019-android-arm-translate: translate($io2019-android-arm-translate-x, $io201
     transform-origin: 50% 10%;
     user-select: none;
     pointer-events: none;
-    animation: keyframes-android-arm-wave 5s ease-in-out #{$initial-animation-delay-seconds}s infinite;
+    animation: keyframes-android-arm-wave 5s ease-in-out #{theme.$animations-initial-delay}s infinite;
 
     @media (max-aspect-ratio: $page-base-ratio-string) {
         & {
@@ -163,6 +123,10 @@ $io2019-android-arm-translate: translate($io2019-android-arm-translate-x, $io201
             width: percentage($io2019-android-arm-width / $io2019-base-width * $page-portrait-scaling);
             height: auto;
         }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        animation: none !important;
     }
 }
 
@@ -189,12 +153,13 @@ $io2019-android-arm-translate: translate($io2019-android-arm-translate-x, $io201
 }
 
 #io2019-content {
-    width: 13rem;
+    font-size: 1.7vw;
+    width: 13em;
     height: auto;
     transform: translate(24.5%, -7%) skew(359deg, 1deg);
-    padding: 1rem;
+    padding: 1em;
     background-color: rgba(255, 255, 255, 0.5);
-    border-radius: 2rem;
+    border-radius: 2em;
     margin: 0;
     overflow: hidden;
     display: flex;
@@ -208,13 +173,25 @@ $io2019-android-arm-translate: translate($io2019-android-arm-translate-x, $io201
     }
 
     h1 {
-        font-size: 2rem;
-        margin-bottom: 1rem;
+        font-size: 2em;
+        margin-bottom: 1em;
     }
 
     span {
         > b {
             color: #8af78a;
+        }
+    }
+
+    @media (max-aspect-ratio: $page-base-ratio-string) {
+        & {
+            font-size: 1.7vh * $page-base-ratio;
+        }
+    }
+
+    @media (max-aspect-ratio: $page-portrait-ratio-string) {
+        & {
+            font-size: 1.7vw * $page-portrait-scaling;
         }
     }
 }
@@ -250,7 +227,7 @@ $generated-keyframes-typewriter: ();
     }
 }
 
-$total-duration-seconds: $initial-animation-delay-seconds;
+$total-duration-seconds: theme.$animations-initial-delay;
 @each $line-number, $line-length in $io2019-content-line-lengths {
     $line-duration-seconds: $line-length * $duration-per-char-seconds;
 
@@ -269,6 +246,12 @@ $total-duration-seconds: $initial-animation-delay-seconds;
     }
 
     $total-duration-seconds: $total-duration-seconds + $line-duration-seconds;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #io2019-content > * {
+        animation: none !important;
+    }
 }
 
 #logo-container {
