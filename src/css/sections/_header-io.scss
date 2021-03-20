@@ -1,5 +1,6 @@
 @use '../theme';
 
+// ----------------------------------------------------------------------------------------------------
 // Page dimensions
 
 $-base-x: 4;
@@ -19,6 +20,7 @@ $-narrow-ratio: $-narrow-x / $-narrow-y;
 $-narrow-ratio-string: "#{$-narrow-x} / #{$-narrow-y}";
 
 
+// ----------------------------------------------------------------------------------------------------
 // Image dimensions
 
 $-base-width: 2304px;
@@ -28,12 +30,16 @@ $-android-arm-width: 219px;
 $-android-arm-height: 501px;
 $-android-arm-translate-x: 247%;
 $-android-arm-translate-y: -18%;
+$-android-arm-translate: translate($-android-arm-translate-x, $-android-arm-translate-y);
 
 $-person-arm-width: 168px;
 $-person-arm-height: 122px;
 $-person-arm-translate-x: -82%;
 $-person-arm-translate-y: -78%;
 
+
+// ----------------------------------------------------------------------------------------------------
+// Base layout
 
 #header-io {
     width: 100%;
@@ -70,38 +76,40 @@ $-person-arm-translate-y: -78%;
     }
 }
 
-$io2019-android-arm-translate: translate($-android-arm-translate-x, $-android-arm-translate-y);
+
+// ----------------------------------------------------------------------------------------------------
+// Android arm
 
 @keyframes keyframes-android-arm-wave {
     from {
-        transform: $io2019-android-arm-translate rotate(0deg);
+        transform: $-android-arm-translate rotate(0deg);
     }
 
     10% {
-        transform: $io2019-android-arm-translate rotate(-225deg);
+        transform: $-android-arm-translate rotate(-225deg);
     }
 
     20% {
-        transform: $io2019-android-arm-translate rotate(-135deg);
+        transform: $-android-arm-translate rotate(-135deg);
     }
 
     30% {
-        transform: $io2019-android-arm-translate rotate(-225deg);
+        transform: $-android-arm-translate rotate(-225deg);
     }
 
     40% {
-        transform: $io2019-android-arm-translate rotate(0deg);
+        transform: $-android-arm-translate rotate(0deg);
     }
 
     to {
-        transform: $io2019-android-arm-translate rotate(0deg);
+        transform: $-android-arm-translate rotate(0deg);
     }
 }
 
 #header-io-android-arm {
     width: percentage($-android-arm-width / $-base-width);
     height: auto;
-    transform: $io2019-android-arm-translate;
+    transform: $-android-arm-translate;
     transform-origin: 50% 10%;
     user-select: none;
     pointer-events: none;
@@ -126,6 +134,10 @@ $io2019-android-arm-translate: translate($-android-arm-translate-x, $-android-ar
     }
 }
 
+
+// ----------------------------------------------------------------------------------------------------
+// Person arm
+
 #header-io-person-arm {
     width: percentage($-person-arm-width / $-base-width);
     height: auto;
@@ -148,7 +160,22 @@ $io2019-android-arm-translate: translate($-android-arm-translate-x, $-android-ar
     }
 }
 
-#header-io-content {
+
+// ----------------------------------------------------------------------------------------------------
+// Android body
+
+$-android-body-line-lengths: (
+    1: 10,
+    2: 13,
+    3: 8,
+    4: 8,
+    5: 21,
+    6: 17,
+    7: 12
+);
+$-typewriter-char-duration: 0.04;
+
+#header-io-android-body {
     font-size: 1.7vw;
     width: 13em;
     height: auto;
@@ -165,7 +192,7 @@ $io2019-android-arm-translate: translate($-android-arm-translate-x, $-android-ar
     > * {
         margin: 0;
         overflow: hidden;
-        border-right: 0.2ch solid transparent; // Cursor
+        border-right: 0.2ch solid transparent; // Text cursor
     }
 
     h1 {
@@ -191,17 +218,6 @@ $io2019-android-arm-translate: translate($-android-arm-translate-x, $-android-ar
         }
     }
 }
-
-$duration-per-char-seconds: 0.05;
-$io2019-content-line-lengths: (
-    1: 10,
-    2: 13,
-    3: 8,
-    4: 8,
-    5: 21,
-    6: 17,
-    7: 11
-);
 
 @keyframes border-black-full {
     from {
@@ -239,37 +255,42 @@ $io2019-content-line-lengths: (
     }
 }
 
-$generated-keyframes-typewriter: ();
-@each $line-number, $line-length in $io2019-content-line-lengths {
-    @if map-get($generated-keyframes-typewriter, $line-length) == null {
-        $generated-keyframes-typewriter: map-merge($generated-keyframes-typewriter, ($line-length: true));
+// Generate only necessary keyframes
+$-generated-keyframes-typewriter: ();
+@each $line-number, $line-length in $-android-body-line-lengths {
+    @if map-get($-generated-keyframes-typewriter, $line-length) == null {
+        $-generated-keyframes-typewriter: map-merge($-generated-keyframes-typewriter, ($line-length: true));
         @include generate-keyframes-typewriter($line-length);
     }
 }
 
-$total-duration-seconds: theme.$animations-initial-delay;
-@each $line-number, $line-length in $io2019-content-line-lengths {
-    $line-duration-seconds: $line-length * $duration-per-char-seconds;
+$-typewriter-total-duration: theme.$animations-initial-delay;
+@each $line-number, $line-length in $-android-body-line-lengths {
+    $line-duration: $line-length * $-typewriter-char-duration;
 
-    $animations: (
-        keyframes-typewriter-#{$line-length} #{$line-duration-seconds}s steps(#{$line-length}) #{$total-duration-seconds}s 1 normal both,
-        border-black-full #{$line-duration-seconds}s steps(1) #{$total-duration-seconds}s 1 normal none
-    );
-
-    @if $line-number == length($io2019-content-line-lengths) {
-        $end-cursor-animation: border-black-blink 0.5s step-end #{$total-duration-seconds + $line-duration-seconds}s infinite alternate;
-        $animations: append($animations, $end-cursor-animation)
+    $animations: ();
+    @if $line-number < length($-android-body-line-lengths) {
+        $animations: (
+            keyframes-typewriter-#{$line-length} #{$line-duration}s steps(#{$line-length}) #{$-typewriter-total-duration}s 1 normal backwards,
+            border-black-full #{$line-duration}s step-start #{$-typewriter-total-duration}s 1 normal none
+        );
+    } @else {
+        $animations: (
+            keyframes-typewriter-#{$line-length} #{$line-duration}s steps(#{$line-length}) #{$-typewriter-total-duration}s 1 normal both,
+            border-black-full #{$line-duration}s step-start #{$-typewriter-total-duration}s 1 normal none,
+            border-black-blink 0.5s step-end #{$-typewriter-total-duration + $line-duration}s infinite alternate
+        );
     }
 
-    #io2019-content > *:nth-child(#{$line-number}) {
+    #header-io-android-body > *:nth-child(#{$line-number}) {
         animation: $animations;
     }
 
-    $total-duration-seconds: $total-duration-seconds + $line-duration-seconds;
+    $-typewriter-total-duration: $-typewriter-total-duration + $line-duration;
 }
 
 @media (prefers-reduced-motion: reduce) {
-    #io2019-content > * {
+    #header-io-android-body > * {
         animation: none !important;
     }
 }
