@@ -1,5 +1,6 @@
-@use '../mixins';
-@use '../theme';
+@use "sass:map";
+@use "../mixins";
+@use "../theme";
 
 // ----------------------------------------------------------------------------------------------------
 // Page dimensions
@@ -261,8 +262,8 @@ $-typewriter-char-duration: 0.04;
 // Generate only necessary keyframes
 $-generated-keyframes-typewriter: ();
 @each $line-number, $line-length in $-android-body-line-lengths {
-    @if map-get($-generated-keyframes-typewriter, $line-length) == null {
-        $-generated-keyframes-typewriter: map-merge($-generated-keyframes-typewriter, ($line-length: true));
+    @if map.get($-generated-keyframes-typewriter, $line-length) == null {
+        $-generated-keyframes-typewriter: map.set($-generated-keyframes-typewriter, $line-length, true);
         @include generate-keyframes-typewriter($line-length);
     }
 }
