@@ -2,52 +2,5 @@
 @use 'common';
 @use 'theme';
 @use 'sections/header-io';
-
-#logo-container {
-    height: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-
-    > ul {
-        max-width: 30rem;
-        margin: 0;
-        padding: 1rem;
-        list-style-type: none;
-
-        > li + li {
-            margin-top: 1rem;
-        }
-    }
-
-    a {
-        display: block;
-        padding: 0.5rem;
-        color: inherit;
-        text-decoration: inherit;
-
-        &:hover, &:focus {
-            background-color: var(--color-background-hover);
-        }
-
-        figure {
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-
-            figcaption + img {
-                margin-top: 0.25rem;
-            }
-        }
-    }
-}
-
-#copyright {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0.5rem;
-    background-color: var(--color-background-text);
-    color: var(--color-background);
-}
+@use 'sections/main';
+@use 'sections/footer';
