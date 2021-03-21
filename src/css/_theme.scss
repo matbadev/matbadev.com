@@ -1,32 +1,94 @@
 $animations-initial-delay: 2;
 
+// ----------------------------------------------------------------------------------------------------
+// Root theme
+
 :root {
-    // Basic styling
-
-    font-size: 2vw;
-    font-family: sans-serif;
-
-
-    // Colors
-
-    --color-background: #e1e4e1;
-    --color-background-image: #ffffff90;
-    --color-background-text: #000000;
-    --color-background-hover: #00000020;
+    --color-background: #eeeeee;
+    --color-text: #292929;
     --color-accent: #8af78a;
+    --color-hover: #00000010;
+    --color-link: #0000a5;
+    --color-link-visited: #5f0085;
 
     @media (prefers-color-scheme: dark) {
         & {
             --color-background: #000000;
-            --color-background-image: #000000a4;
-            --color-background-text: #ffffff;
-            --color-background-hover: #00000020;
+            --color-text: #ffffff;
             --color-accent: #8af78a;
+            --color-hover: #ffffff30;
+            --color-link: #8484ff;
+            --color-link-visited: #d15dff;
         }
     }
 }
 
+
+// ----------------------------------------------------------------------------------------------------
+// Inherited themes
+
+.card {
+    --color-background: #dddddd;
+    --color-text: #000000;
+
+    @media (prefers-color-scheme: dark) {
+        & {
+            --color-background: #333333;
+            --color-text: #ffffff;
+        }
+    }
+}
+
+.codebox {
+    --color-background: #ffffff90;
+    --color-text: #000000;
+
+    @media (prefers-color-scheme: dark) {
+        & {
+            --color-background: #000000a4;
+            --color-text: #ffffff;
+        }
+    }
+}
+
+
+// ----------------------------------------------------------------------------------------------------
+// Default element styling
+
+:root {
+    height: 100%;
+    font-size: 2vw;
+    font-family: sans-serif;
+}
+
 body {
+    height: 100%;
     background-color: var(--color-background);
-    color: var(--color-background-text);
+    color: var(--color-text);
+}
+
+a {
+    color: var(--color-link);
+
+    &:hover, &:focus, &:active {
+        background-color: var(--color-hover);
+    }
+
+    &:visited {
+        color: var(--color-link-visited);
+    }
+}
+
+
+// ----------------------------------------------------------------------------------------------------
+// Custom element styling
+
+.card {
+    background-color: var(--color-background);
+    color: var(--color-text);
+}
+
+.codebox {
+    background-color: var(--color-background);
+    color: var(--color-text);
 }

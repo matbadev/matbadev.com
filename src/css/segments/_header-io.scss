@@ -33,6 +33,7 @@ $-android-arm-height: 501px;
 $-android-arm-translate-x: 247%;
 $-android-arm-translate-y: -18%;
 $-android-arm-translate: translate($-android-arm-translate-x, $-android-arm-translate-y);
+$-android-arm-transform-origin: 50% 15%;
 
 $-person-arm-width: 168px;
 $-person-arm-height: 122px;
@@ -114,7 +115,7 @@ $-person-arm-translate-y: -78%;
     width: percentage($-android-arm-width / $-base-width);
     height: auto;
     transform: $-android-arm-translate;
-    transform-origin: 50% 10%;
+    transform-origin: $-android-arm-transform-origin;
     user-select: none;
     pointer-events: none;
     animation: keyframes-android-arm-wave 5s ease-in-out #{theme.$animations-initial-delay}s infinite;
@@ -185,7 +186,6 @@ $-typewriter-char-duration: 0.04;
     height: auto;
     transform: translate(24.5%, -7%) skew(359deg, 1deg);
     padding: 1em;
-    background-color: var(--color-background-image);
     border-radius: 2em;
     margin: 0;
     overflow: hidden;
@@ -225,17 +225,17 @@ $-typewriter-char-duration: 0.04;
 
 @keyframes border-text-full {
     from {
-        border-color: var(--color-background-text);
+        border-color: var(--color-text);
     }
 
     to {
-        border-color: var(--color-background-text);
+        border-color: var(--color-text);
     }
 }
 
 @keyframes border-text-blink {
     from {
-        border-color: var(--color-background-text);
+        border-color: var(--color-text);
     }
 
     50% {
@@ -243,7 +243,7 @@ $-typewriter-char-duration: 0.04;
     }
 
     to {
-        border-color: var(--color-background-text);
+        border-color: var(--color-text);
     }
 }
 
