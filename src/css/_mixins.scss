@@ -1,7 +1,7 @@
-.layout-stack {
+@mixin layout-stack {
     position: relative;
 
-    & > * {
+    > * {
         position: absolute;
     }
 }
