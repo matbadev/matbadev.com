@@ -10,19 +10,23 @@ $animations-initial-delay: 2;
     // Colors
 
     --color-background: #e1e4e1;
-    --color-background-inverse: #000000;
+    --color-background-image: #ffffff90;
+    --color-background-text: #000000;
     --color-background-hover: #00000020;
+    --color-accent: #8af78a;
 
     @media (prefers-color-scheme: dark) {
         & {
             --color-background: #000000;
-            --color-background-inverse: #ffffff;
+            --color-background-image: #000000a4;
+            --color-background-text: #ffffff;
             --color-background-hover: #00000020;
+            --color-accent: #8af78a;
         }
     }
 }
 
 body {
     background-color: var(--color-background);
-    color: var(--color-background-inverse);
+    color: var(--color-background-text);
 }

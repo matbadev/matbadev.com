@@ -181,7 +181,7 @@ $-typewriter-char-duration: 0.04;
     height: auto;
     transform: translate(24.5%, -7%) skew(359deg, 1deg);
     padding: 1em;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: var(--color-background-image);
     border-radius: 2em;
     margin: 0;
     overflow: hidden;
@@ -202,7 +202,7 @@ $-typewriter-char-duration: 0.04;
 
     span {
         > b {
-            color: #8af78a;
+            color: var(--color-accent);
         }
     }
 
@@ -219,19 +219,19 @@ $-typewriter-char-duration: 0.04;
     }
 }
 
-@keyframes border-black-full {
+@keyframes border-text-full {
     from {
-        border-color: black;
+        border-color: var(--color-background-text);
     }
 
     to {
-        border-color: black;
+        border-color: var(--color-background-text);
     }
 }
 
-@keyframes border-black-blink {
+@keyframes border-text-blink {
     from {
-        border-color: black;
+        border-color: var(--color-background-text);
     }
 
     50% {
@@ -239,7 +239,7 @@ $-typewriter-char-duration: 0.04;
     }
 
     to {
-        border-color: black;
+        border-color: var(--color-background-text);
     }
 }
 
@@ -272,13 +272,13 @@ $-typewriter-total-duration: theme.$animations-initial-delay;
     @if $line-number < length($-android-body-line-lengths) {
         $animations: (
             keyframes-typewriter-#{$line-length} #{$line-duration}s steps(#{$line-length}) #{$-typewriter-total-duration}s 1 normal backwards,
-            border-black-full #{$line-duration}s step-start #{$-typewriter-total-duration}s 1 normal none
+            border-text-full #{$line-duration}s step-start #{$-typewriter-total-duration}s 1 normal none
         );
     } @else {
         $animations: (
             keyframes-typewriter-#{$line-length} #{$line-duration}s steps(#{$line-length}) #{$-typewriter-total-duration}s 1 normal both,
-            border-black-full #{$line-duration}s step-start #{$-typewriter-total-duration}s 1 normal none,
-            border-black-blink 0.5s step-end #{$-typewriter-total-duration + $line-duration}s infinite alternate
+            border-text-full #{$line-duration}s step-start #{$-typewriter-total-duration}s 1 normal none,
+            border-text-blink 0.5s step-end #{$-typewriter-total-duration + $line-duration}s infinite alternate
         );
     }
 
