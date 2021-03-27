@@ -22,10 +22,11 @@ jobs:
       - name: Build using NPM
         run: npm run build
 
-      - name: Setup ID SSH key
+      - name: Setup SSH
         env:
           SSH_KEY_PUBLIC: ${{ secrets.SSH_KEY_PUBLIC }}
           SSH_KEY_PRIVATE: ${{ secrets.SSH_KEY_PRIVATE }}
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
         run: |
           cd
           mkdir -m 700 .ssh
@@ -34,9 +35,10 @@ jobs:
           chmod 644 id_rsa.pub
           echo "$SSH_KEY_PRIVATE" > id_rsa
           chmod 600 id_rsa
+          echo "$SSH_KNOWN_HOSTS" > known_hosts
+          chmod 644 known_hosts
 
       - name: Copy build to server
         env:
-          SERVER_USER: ${{ secrets.SERVER_USER }}
           SERVER_IP_ADDRESS: ${{ secrets.SERVER_IP_ADDRESS }}
-        run: scp -r build/ "${SERVER_USER}@${SERVER_IP_ADDRESS}:/var/www/www.matbadev.com-$(date +%s)/"
+        run: scp -r build/ "ci@${SERVER_IP_ADDRESS}:/var/www/www.matbadev.com-$(date +%s)/"
