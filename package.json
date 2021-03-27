@@ -10,7 +10,7 @@
     "start:server": "browser-sync start --server 'public' --watch",
     "build": "npm run clean && npm run build:public && npm run build:sass",
     "build:public": "cp -r public/ build/",
-    "build:sass": "sass src/css:build/css"
+    "build:sass": "sass --style=compressed --no-error-css --stop-on-error src/css:build/css"
   },
   "repository": {
     "type": "git",
