@@ -2,6 +2,7 @@
   "name": "matbadev.com",
   "version": "1.0.0",
   "description": "Website hosted at matbadev.com",
+  "license": "UNLICENSED",
   "main": "index.html",
   "scripts": {
     "clean": "rm -rf build/ public/css/",
