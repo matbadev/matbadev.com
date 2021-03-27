@@ -46,4 +46,4 @@ jobs:
       - name: Activate uploaded build
         env:
           SERVER_IP_ADDRESS: ${{ secrets.SERVER_IP_ADDRESS }}
-        run: ssh -t "ci@${SERVER_IP_ADDRESS}" "ln -sfn /var/www/www.matbadev.com-${GITHUB_RUN_NUMBER} /var/www/www.matbadev.com"
+        run: ssh -t "ci@${SERVER_IP_ADDRESS}" "ln -sfn www.matbadev.com-${GITHUB_RUN_NUMBER} /var/www/www.matbadev.com"
