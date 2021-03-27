@@ -199,9 +199,10 @@ $-typewriter-char-duration: 0.04;
         border-right: 0.2ch solid transparent; // Text cursor
     }
 
-    h1 {
-        font-size: 2em;
+    > *:first-child {
         margin-bottom: 1em;
+        font-size: 2em;
+        font-weight: bold;
     }
 
     span {
