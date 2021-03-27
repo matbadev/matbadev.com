@@ -56,13 +56,11 @@ $animations-initial-delay: 2;
 // Default element styling
 
 :root {
-    height: 100%;
     font-size: 2vw;
     font-family: sans-serif;
 }
 
 body {
-    height: 100%;
     background-color: var(--color-background);
     color: var(--color-text);
 }
