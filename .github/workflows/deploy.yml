@@ -10,7 +10,7 @@ on:
 
 jobs:
   build-and-deploy:
-    name: Build
+    name: Build and deploy
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -21,3 +21,22 @@ jobs:
 
       - name: Build using NPM
         run: npm run build
+
+      - name: Setup ID SSH key
+        env:
+          SSH_KEY_PUBLIC: ${{ secrets.SSH_KEY_PUBLIC }}
+          SSH_KEY_PRIVATE: ${{ secrets.SSH_KEY_PRIVATE }}
+        run: |
+          cd
+          mkdir -m 700 .ssh
+          cd .ssh
+          echo "$SSH_KEY_PUBLIC" > id_rsa.pub
+          chmod 644 id_rsa.pub
+          echo "$SSH_KEY_PRIVATE" > id_rsa
+          chmod 600 id_rsa
+
+      - name: Copy build to server
+        env:
+          SERVER_USER: ${{ secrets.SERVER_USER }}
+          SERVER_IP_ADDRESS: ${{ secrets.SERVER_IP_ADDRESS }}
+        run: scp -r build/ "${SERVER_USER}@${SERVER_IP_ADDRESS}:/var/www/www.matbadev.com-$(date +%s)/"
