@@ -41,4 +41,4 @@ jobs:
       - name: Copy build to server
         env:
           SERVER_IP_ADDRESS: ${{ secrets.SERVER_IP_ADDRESS }}
-        run: scp -r build/ "ci@${SERVER_IP_ADDRESS}:/var/www/www.matbadev.com-$(date +%s)/"
+        run: scp -r build/ "ci@${SERVER_IP_ADDRESS}:/var/www/www.matbadev.com-${GITHUB_RUN_ID}/"
