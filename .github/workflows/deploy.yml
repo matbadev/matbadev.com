@@ -39,11 +39,7 @@ jobs:
           chmod 644 known_hosts
 
       - name: Upload build to server
-        env:
-          SERVER_IP_ADDRESS: ${{ secrets.SERVER_IP_ADDRESS }}
-        run: scp -r build/ "ci@${SERVER_IP_ADDRESS}:/var/www/www.matbadev.com-${GITHUB_RUN_NUMBER}/"
+        run: scp -r build/ "ci@www.matbadev.com:/var/www/www.matbadev.com-${GITHUB_RUN_NUMBER}/"
 
       - name: Activate uploaded build
-        env:
-          SERVER_IP_ADDRESS: ${{ secrets.SERVER_IP_ADDRESS }}
-        run: ssh -t "ci@${SERVER_IP_ADDRESS}" "ln -sfn www.matbadev.com-${GITHUB_RUN_NUMBER} /var/www/www.matbadev.com"
+        run: ssh -t ci@www.matbadev.com "ln -sfn www.matbadev.com-${GITHUB_RUN_NUMBER} /var/www/www.matbadev.com"
