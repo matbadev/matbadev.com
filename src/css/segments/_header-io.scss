@@ -55,9 +55,7 @@ $-person-arm-translate-y: -78%;
     overflow: hidden;
 
     @media (max-aspect-ratio: $-portrait-ratio-string) {
-        & {
-            height: 100vw / $-portrait-ratio;
-        }
+        height: 100vw / $-portrait-ratio;
     }
 }
 
@@ -67,17 +65,13 @@ $-person-arm-translate-y: -78%;
     user-select: none;
 
     @media (max-aspect-ratio: $-base-ratio-string) {
-        & {
-            width: auto;
-            height: 100%;
-        }
+        width: auto;
+        height: 100%;
     }
 
     @media (max-aspect-ratio: $-portrait-ratio-string) {
-        & {
-            width: percentage($-portrait-scaling);
-            height: auto;
-        }
+        width: percentage($-portrait-scaling);
+        height: auto;
     }
 }
 
@@ -121,17 +115,13 @@ $-person-arm-translate-y: -78%;
     animation: keyframes-android-arm-wave 5s ease-in-out #{theme.$animations-initial-delay}s infinite;
 
     @media (max-aspect-ratio: $-base-ratio-string) {
-        & {
-            width: auto;
-            height: percentage($-android-arm-height / $-base-height);
-        }
+        width: auto;
+        height: percentage($-android-arm-height / $-base-height);
     }
 
     @media (max-aspect-ratio: $-portrait-ratio-string) {
-        & {
-            width: percentage($-android-arm-width / $-base-width * $-portrait-scaling);
-            height: auto;
-        }
+        width: percentage($-android-arm-width / $-base-width * $-portrait-scaling);
+        height: auto;
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -151,17 +141,13 @@ $-person-arm-translate-y: -78%;
     pointer-events: none;
 
     @media (max-aspect-ratio: $-base-ratio-string) {
-        & {
-            width: auto;
-            height: percentage($-person-arm-height / $-base-height);
-        }
+        width: auto;
+        height: percentage($-person-arm-height / $-base-height);
     }
 
     @media (max-aspect-ratio: $-portrait-ratio-string) {
-        & {
-            width: percentage($-person-arm-width / $-base-width * $-portrait-scaling);
-            height: auto;
-        }
+        width: percentage($-person-arm-width / $-base-width * $-portrait-scaling);
+        height: auto;
     }
 }
 
@@ -212,15 +198,11 @@ $-typewriter-char-duration: 0.04;
     }
 
     @media (max-aspect-ratio: $-base-ratio-string) {
-        & {
-            font-size: 1.7vh * $-base-ratio;
-        }
+        font-size: 1.7vh * $-base-ratio;
     }
 
     @media (max-aspect-ratio: $-portrait-ratio-string) {
-        & {
-            font-size: 1.7vw * $-portrait-scaling;
-        }
+        font-size: 1.7vw * $-portrait-scaling;
     }
 }
 

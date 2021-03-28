@@ -12,14 +12,12 @@ $animations-initial-delay: 2;
     --color-link-visited: #5f0085;
 
     @media (prefers-color-scheme: dark) {
-        & {
-            --color-background: #000000;
-            --color-text: #ffffff;
-            --color-accent: #8af78a;
-            --color-hover: #ffffff30;
-            --color-link: #8484ff;
-            --color-link-visited: #d15dff;
-        }
+        --color-background: #000000;
+        --color-text: #ffffff;
+        --color-accent: #8af78a;
+        --color-hover: #ffffff30;
+        --color-link: #8484ff;
+        --color-link-visited: #d15dff;
     }
 }
 
@@ -32,10 +30,8 @@ $animations-initial-delay: 2;
     --color-text: #000000;
 
     @media (prefers-color-scheme: dark) {
-        & {
-            --color-background: #333333;
-            --color-text: #ffffff;
-        }
+        --color-background: #333333;
+        --color-text: #ffffff;
     }
 }
 
@@ -44,10 +40,8 @@ $animations-initial-delay: 2;
     --color-text: #000000;
 
     @media (prefers-color-scheme: dark) {
-        & {
-            --color-background: #000000a4;
-            --color-text: #ffffff;
-        }
+        --color-background: #000000a4;
+        --color-text: #ffffff;
     }
 }
 
@@ -56,8 +50,24 @@ $animations-initial-delay: 2;
 // Default element styling
 
 :root {
-    font-size: 2vw;
+    font-size: 100%;
     font-family: sans-serif;
+
+    @media (min-width: 576px) {
+        font-size: 120%;
+    }
+
+    @media (min-width: 768px) {
+        font-size: 140%;
+    }
+
+    @media (min-width: 992px) {
+        font-size: 150%;
+    }
+
+    @media (min-width: 1200px) {
+        font-size: 160%;
+    }
 }
 
 body {
