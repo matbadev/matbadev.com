@@ -1,3 +1,4 @@
+@use "sass:math";
 @use "sass:map";
 @use "../mixins";
 @use "../theme";
@@ -7,18 +8,18 @@
 
 $-base-x: 4;
 $-base-y: 3;
-$-base-ratio: $-base-x / $-base-y;
+$-base-ratio: math.div($-base-x, $-base-y);
 $-base-ratio-string: "#{$-base-x} / #{$-base-y}";
 
 $-portrait-x: 8;
 $-portrait-y: 10;
-$-portrait-ratio: $-portrait-x / $-portrait-y;
+$-portrait-ratio: math.div($-portrait-x, $-portrait-y);
 $-portrait-ratio-string: "#{$-portrait-x} / #{$-portrait-y}";
-$-portrait-scaling: $-base-ratio * ($-portrait-y / $-portrait-x);
+$-portrait-scaling: $-base-ratio * math.div($-portrait-y, $-portrait-x);
 
 $-narrow-x: 6;
 $-narrow-y: 10;
-$-narrow-ratio: $-narrow-x / $-narrow-y;
+$-narrow-ratio: math.div($-narrow-x, $-narrow-y);
 $-narrow-ratio-string: "#{$-narrow-x} / #{$-narrow-y}";
 
 
@@ -55,7 +56,7 @@ $-person-arm-translate-y: -78%;
     overflow: hidden;
 
     @media (max-aspect-ratio: $-portrait-ratio-string) {
-        height: 100vw / $-portrait-ratio;
+        height: math.div(100vw, $-portrait-ratio);
     }
 }
 
@@ -106,7 +107,7 @@ $-person-arm-translate-y: -78%;
 }
 
 #header-io-android-arm {
-    width: percentage($-android-arm-width / $-base-width);
+    width: percentage(math.div($-android-arm-width, $-base-width));
     height: auto;
     transform: $-android-arm-translate;
     transform-origin: $-android-arm-transform-origin;
@@ -116,11 +117,11 @@ $-person-arm-translate-y: -78%;
 
     @media (max-aspect-ratio: $-base-ratio-string) {
         width: auto;
-        height: percentage($-android-arm-height / $-base-height);
+        height: percentage(math.div($-android-arm-height, $-base-height));
     }
 
     @media (max-aspect-ratio: $-portrait-ratio-string) {
-        width: percentage($-android-arm-width / $-base-width * $-portrait-scaling);
+        width: percentage(math.div($-android-arm-width, $-base-width) * $-portrait-scaling);
         height: auto;
     }
 
@@ -134,7 +135,7 @@ $-person-arm-translate-y: -78%;
 // Person arm
 
 #header-io-person-arm {
-    width: percentage($-person-arm-width / $-base-width);
+    width: percentage(math.div($-person-arm-width, $-base-width));
     height: auto;
     transform: translate($-person-arm-translate-x, $-person-arm-translate-y);
     user-select: none;
@@ -142,11 +143,11 @@ $-person-arm-translate-y: -78%;
 
     @media (max-aspect-ratio: $-base-ratio-string) {
         width: auto;
-        height: percentage($-person-arm-height / $-base-height);
+        height: percentage(math.div($-person-arm-height, $-base-height));
     }
 
     @media (max-aspect-ratio: $-portrait-ratio-string) {
-        width: percentage($-person-arm-width / $-base-width * $-portrait-scaling);
+        width: percentage(math.div($-person-arm-width, $-base-width) * $-portrait-scaling);
         height: auto;
     }
 }
