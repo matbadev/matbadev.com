@@ -4,7 +4,7 @@ This repository contains the source code for the website hosted at [https://www.
 
 ## Developing
 
-1. Install Node and NPM, e.g. using [NVM](https://github.com/nvm-sh/nvm)
+1. Install Node and NPM by installing [NVM](https://github.com/nvm-sh/nvm) and running `nvm install`
 1. Install [Browsersync](https://browsersync.io/) using `npm install -g browser-sync`
 1. Install project dependencies using `npm install`
 1. Start a local server running the project with `npm start`
