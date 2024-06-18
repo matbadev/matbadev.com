@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Install NPM dependencies
         run: npm install
@@ -33,10 +33,14 @@ jobs:
           echo "$SSH_KEY_PRIVATE" > id_rsa
           chmod 600 id_rsa
           echo "$SSH_KNOWN_HOSTS" > known_hosts
-          chmod 644 known_hosts
+          chmod 600 known_hosts
 
       - name: Upload build to server
-        run: scp -r build/ "ci@www.matbadev.com:/var/www/www.matbadev.com-${GITHUB_RUN_NUMBER}/"
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+        run: scp -r build/ "ci@${SSH_HOST}:/var/www/www.matbadev.com-${GITHUB_RUN_NUMBER}/"
 
       - name: Activate uploaded build
-        run: ssh -t ci@www.matbadev.com "ln -sfn www.matbadev.com-${GITHUB_RUN_NUMBER} /var/www/www.matbadev.com"
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+        run: ssh -t "ci@${SSH_HOST}" "ln -sfn www.matbadev.com-${GITHUB_RUN_NUMBER} /var/www/www.matbadev.com"
