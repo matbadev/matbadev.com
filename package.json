@@ -26,6 +26,6 @@
     "normalize.css": "^8.0.1"
   },
   "devDependencies": {
-    "sass": "^1.69.5"
+    "sass": "^1.77.6"
   }
 }
