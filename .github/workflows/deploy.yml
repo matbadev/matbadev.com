@@ -6,12 +6,19 @@ on:
       - master
 
 jobs:
-  build-and-deploy:
+  build_and_deploy:
     name: Build and deploy
     runs-on: ubuntu-latest
     steps:
+      # https://github.com/marketplace/actions/checkout
       - name: Checkout code
         uses: actions/checkout@v4
+
+      # https://github.com/marketplace/actions/setup-node-js-environment
+      - name: Install Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
 
       - name: Install NPM dependencies
         run: npm install
