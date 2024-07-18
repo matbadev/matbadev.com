@@ -78,7 +78,9 @@ body {
 a {
     color: var(--color-link);
 
-    &:hover, &:focus, &:active {
+    &:hover,
+    &:focus,
+    &:active {
         background-color: var(--color-hover);
     }
 

@@ -1,6 +1,5 @@
 @use "sass:math";
 @use "sass:map";
-@use "../mixins";
 @use "../theme";
 
 // ----------------------------------------------------------------------------------------------------
@@ -46,10 +45,9 @@ $-person-arm-translate-y: -78%;
 // Base layout
 
 #header-io {
-    @include mixins.layout-stack;
-
     width: 100%;
     height: 100vh;
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -57,6 +55,10 @@ $-person-arm-translate-y: -78%;
 
     @media (max-aspect-ratio: $-portrait-ratio-string) {
         height: math.div(100vw, $-portrait-ratio);
+    }
+
+    > * {
+        position: absolute;
     }
 }
 
@@ -236,7 +238,7 @@ $-typewriter-char-duration: 0.04;
         from {
             width: 0ch;
         }
-    
+
         to {
             width: #{$chars-count}ch;
         }
@@ -244,37 +246,44 @@ $-typewriter-char-duration: 0.04;
 }
 
 // Generate only necessary keyframes
-$-generated-keyframes-typewriter: ();
+$-generated-keyframes-typewriter: (
+);
+
 @each $line-number, $line-length in $-android-body-line-lengths {
-    @if map.get($-generated-keyframes-typewriter, $line-length) == null {
+    @if map.get($-generated-keyframes-typewriter, $line-length)==null {
         $-generated-keyframes-typewriter: map.set($-generated-keyframes-typewriter, $line-length, true);
         @include generate-keyframes-typewriter($line-length);
     }
 }
 
 $-typewriter-total-duration: theme.$animations-initial-delay;
+
 @each $line-number, $line-length in $-android-body-line-lengths {
     $line-duration: $line-length * $-typewriter-char-duration;
 
-    $animations: ();
-    @if $line-number < length($-android-body-line-lengths) {
-        $animations: (
-            keyframes-typewriter-#{$line-length} #{$line-duration}s steps(#{$line-length}) #{$-typewriter-total-duration}s 1 normal backwards,
-            border-text-full #{$line-duration}s step-start #{$-typewriter-total-duration}s 1 normal none
-        );
-    } @else {
-        $animations: (
-            keyframes-typewriter-#{$line-length} #{$line-duration}s steps(#{$line-length}) #{$-typewriter-total-duration}s 1 normal both,
-            border-text-full #{$line-duration}s step-start #{$-typewriter-total-duration}s 1 normal none,
-            border-text-blink 0.5s step-end #{$-typewriter-total-duration + $line-duration}s infinite alternate
-        );
-    }
+    $animations: (
+    );
 
-    #header-io-android-body > *:nth-child(#{$line-number}) {
-        animation: $animations;
-    }
+@if $line-number < length($-android-body-line-lengths) {
+    $animations: (
+        keyframes-typewriter-#{$line-length} #{$line-duration}s steps(#{$line-length}) #{$-typewriter-total-duration}s 1 normal backwards,
+        border-text-full #{$line-duration}s step-start #{$-typewriter-total-duration}s 1 normal none
+    );
+}
 
-    $-typewriter-total-duration: $-typewriter-total-duration + $line-duration;
+@else {
+    $animations: (
+        keyframes-typewriter-#{$line-length} #{$line-duration}s steps(#{$line-length}) #{$-typewriter-total-duration}s 1 normal both,
+        border-text-full #{$line-duration}s step-start #{$-typewriter-total-duration}s 1 normal none,
+        border-text-blink 0.5s step-end #{$-typewriter-total-duration + $line-duration}s infinite alternate
+    );
+}
+
+#header-io-android-body > *:nth-child(#{$line-number}) {
+    animation: $animations;
+}
+
+$-typewriter-total-duration: $-typewriter-total-duration + $line-duration;
 }
 
 @media (prefers-reduced-motion: reduce) {
