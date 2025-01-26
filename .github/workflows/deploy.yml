@@ -46,10 +46,12 @@ jobs:
 
       - name: Upload build to server
         env:
+          SSH_USER: ${{ secrets.SSH_USER }}
           SSH_HOST: ${{ secrets.SSH_HOST }}
-        run: scp -r build/ "ci@${SSH_HOST}:/var/www/www.matbadev.com-${GITHUB_RUN_NUMBER}/"
+        run: scp -r build/ "${SSH_USER}@${SSH_HOST}:/var/www/www.matbadev.com/${GITHUB_RUN_NUMBER}/"
 
       - name: Activate uploaded build
         env:
+          SSH_USER: ${{ secrets.SSH_USER }}
           SSH_HOST: ${{ secrets.SSH_HOST }}
-        run: ssh -t "ci@${SSH_HOST}" "ln -sfn www.matbadev.com-${GITHUB_RUN_NUMBER} /var/www/www.matbadev.com"
+        run: ssh -t "${SSH_USER}@${SSH_HOST}" "ln -sfn ${GITHUB_RUN_NUMBER} /var/www/www.matbadev.com/current"
