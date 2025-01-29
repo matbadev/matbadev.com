@@ -49,11 +49,11 @@ jobs:
           SSH_USER: ${{ secrets.SSH_USER }}
           SSH_HOST: ${{ secrets.SSH_HOST }}
           SSH_PORT: ${{ secrets.SSH_PORT }}
-        run: scp -P "${SSH_PORT}" -r build/ "${SSH_USER}@${SSH_HOST}:/var/www/www.matbadev.com/${GITHUB_RUN_NUMBER}/"
+        run: scp -P "${SSH_PORT}" -r build/ "${SSH_USER}@${SSH_HOST}:/var/www/www.matbadev.com/"
 
       - name: Activate uploaded build
         env:
           SSH_USER: ${{ secrets.SSH_USER }}
           SSH_HOST: ${{ secrets.SSH_HOST }}
           SSH_PORT: ${{ secrets.SSH_PORT }}
-        run: ssh -p "${SSH_PORT}" -t "${SSH_USER}@${SSH_HOST}" "ln -sfn ${GITHUB_RUN_NUMBER} /var/www/www.matbadev.com/current"
+        run: ssh -p "${SSH_PORT}" -t "${SSH_USER}@${SSH_HOST}" "cd /var/www/www.matbadev.com/ && mv build/ ${GITHUB_RUN_NUMBER}/ && ln -sfn ${GITHUB_RUN_NUMBER} current"
