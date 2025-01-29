@@ -1,3 +1,4 @@
+@use "sass:list";
 @use "sass:math";
 @use "sass:map";
 @use "../theme";
@@ -73,7 +74,7 @@ $-person-arm-translate-y: -78%;
     }
 
     @media (max-aspect-ratio: $-portrait-ratio-string) {
-        width: percentage($-portrait-scaling);
+        width: math.percentage($-portrait-scaling);
         height: auto;
     }
 }
@@ -109,7 +110,7 @@ $-person-arm-translate-y: -78%;
 }
 
 #header-io-android-arm {
-    width: percentage(math.div($-android-arm-width, $-base-width));
+    width: math.percentage(math.div($-android-arm-width, $-base-width));
     height: auto;
     transform: $-android-arm-translate;
     transform-origin: $-android-arm-transform-origin;
@@ -119,11 +120,11 @@ $-person-arm-translate-y: -78%;
 
     @media (max-aspect-ratio: $-base-ratio-string) {
         width: auto;
-        height: percentage(math.div($-android-arm-height, $-base-height));
+        height: math.percentage(math.div($-android-arm-height, $-base-height));
     }
 
     @media (max-aspect-ratio: $-portrait-ratio-string) {
-        width: percentage(math.div($-android-arm-width, $-base-width) * $-portrait-scaling);
+        width: math.percentage(math.div($-android-arm-width, $-base-width) * $-portrait-scaling);
         height: auto;
     }
 
@@ -137,7 +138,7 @@ $-person-arm-translate-y: -78%;
 // Person arm
 
 #header-io-person-arm {
-    width: percentage(math.div($-person-arm-width, $-base-width));
+    width: math.percentage(math.div($-person-arm-width, $-base-width));
     height: auto;
     transform: translate($-person-arm-translate-x, $-person-arm-translate-y);
     user-select: none;
@@ -145,11 +146,11 @@ $-person-arm-translate-y: -78%;
 
     @media (max-aspect-ratio: $-base-ratio-string) {
         width: auto;
-        height: percentage(math.div($-person-arm-height, $-base-height));
+        height: math.percentage(math.div($-person-arm-height, $-base-height));
     }
 
     @media (max-aspect-ratio: $-portrait-ratio-string) {
-        width: percentage(math.div($-person-arm-width, $-base-width) * $-portrait-scaling);
+        width: math.percentage(math.div($-person-arm-width, $-base-width) * $-portrait-scaling);
         height: auto;
     }
 }
@@ -264,7 +265,7 @@ $-typewriter-total-duration: theme.$animations-initial-delay;
     $animations: (
     );
 
-@if $line-number < length($-android-body-line-lengths) {
+@if $line-number < list.length(map.keys($-android-body-line-lengths)) {
     $animations: (
         keyframes-typewriter-#{$line-length} #{$line-duration}s steps(#{$line-length}) #{$-typewriter-total-duration}s 1 normal backwards,
         border-text-full #{$line-duration}s step-start #{$-typewriter-total-duration}s 1 normal none
