@@ -6,3 +6,6 @@ public/css/
 
 # Build files
 build/
+
+# IntelliJ
+.idea/
